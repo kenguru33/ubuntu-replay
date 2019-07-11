@@ -2,36 +2,45 @@
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
-# make sure we are in top of home folder
-cd ~
+# essential tools
+sudo $DIR/PackageInstall.sh git
+sudo $DIR/PackageInstall.sh curl
+sudo $DIR/PackageInstall.sh zsh
+sudo $DIR/PackageInstall.sh vim
 
-# essentials tools
-#sudo apt install -y gnome-tweaks git curl vim zsh git
+# nodejs
+curl -sL https://deb.nodesource.com/setup_12.x &>/dev/null | sudo -E bash -
+sudo $DIR/PackageInstall.sh nodejs
 
-# remove unwanted software
-#sudo apt remove -y gnome-shell-extension-ubuntu-dock
-#sudo apt remove -y gnome-shell-extension-desktop-icons
-#sudo apt remove -y gnome-shell-extension-appindicator
+# remove unwanted ubuntu tweaks
+sudo $DIR/PackageRemove.sh gnome-shell-extension-ubuntu-dock
+sudo $DIR/PackageRemove.sh gnome-shell-extension-desktop-icons
+sudo $DIR/PackageRemove.sh gnome-shell-extension-appindicator
 
-# replace default snap installed gnome application deb packages
-#sudo snap remove gnome-calculator gnome-characters gnome-logs gnome-system-monitor
-#sudo apt install -y gnome-calculator gnome-characters gnome-logs gnome-system-monitor
+# remove snap packages and replace them with native ones
+sudo $DIR/SnapPackageRemove.sh gnome-calculator
+sudo $DIR/SnapPackageRemove.sh gnome-calculator 
+sudo $DIR/SnapPackageRemove.sh gnome-logs 
+sudo $DIR/SnapPackageRemove.sh gnome-system-monitor
+sudo $DIR/PackageInstall.sh gnome-calculator
+sudo $DIR/PackageInstall.sh gnome-calculator
+sudo $DIR/PackageInstall.sh gnome-logs 
+sudo $DIR/PackageInstall.sh gnome-system-monitor
 
-# install nodejs
-#curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
-#sudo apt install -y nodejs
+# Better terminal prompt
+sudo $DIR/NpmPackageInstall.sh pure-prompt
 
-# setup npm
-#sudo npm config set unsafe-perm true
+# Setup zsh
+$DIR/ZshSetup.sh
 
-#install prompt theme
-#sudo npm i -g pure-prompt
+# install mail client with support for o365
+sudo $DIR/PackageInstall.sh evolution-ews
 
-# oh-my-zsh
-if [ ! -d ".oh-my-zsh" ]; then
-	
-	sh -c "RUNZSH=no $(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-	cp zshrc ~/.zshrc
-fi
+# TDODO
+# install vscode - own repo
+# install chrome - own repo
+# install gitkraken - own repo
+# install spotify - snap package
+# sound input out chooser extension
 
+echo "Ubuntu 19.04 has been replayed!"
