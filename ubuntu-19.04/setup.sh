@@ -12,7 +12,7 @@ sudo $DIR/PackageInstall.sh vim
 curl -sL https://deb.nodesource.com/setup_12.x &>/dev/null | sudo -E bash -
 sudo $DIR/PackageInstall.sh nodejs
 
-# remove unwanted ubuntu tweaks
+# remove ubunto dash to dock
 sudo $DIR/PackageRemove.sh gnome-shell-extension-ubuntu-dock
 sudo $DIR/PackageRemove.sh gnome-shell-extension-desktop-icons
 sudo $DIR/PackageRemove.sh gnome-shell-extension-appindicator
