@@ -91,13 +91,18 @@ printf '\r%-50s \e[32m%20s\e[m\n' "Installing pure-prompt..." "[OK]"
 # installing additional packages
 printf '\e[33m%s\e[m\n' "Installing additional packages:"
 echo -ne "  Adding repositories..."
+# vscode repo
 curl -sSL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | sudo apt-key add - &>/dev/null 
 sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
+# chrome repo
+wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+
 printf '\r%-50s \e[32m%20s\e[m\n' "Adding repositories..." "[OK]"
 echo -ne "  Refreshing package repositories..."
 "${dir}"/lib/spin.sh "${dir}"/lib/package.sh -u 2>/dev/null
 printf '\r%-50s \e[32m%20s\e[m\n' "Refreshing package repositories..." "[OK]"
-packages=(evolution-ews apt-transport-https code)
+
+packages=(evolution-ews apt-transport-https code google-chrome-stable)
 for package in "${packages[@]}"; do
     echo -ne "  Installing ${package}..."
     "${dir}"/lib/spin.sh "${dir}"/lib/package.sh -i "$package" 2>/dev/null
