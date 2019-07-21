@@ -59,9 +59,9 @@ echo "deb-src https://deb.nodesource.com/$VERSION $DISTRO main" | sudo tee -a /e
 
 printf '\r%-50s \e[32m%20s\e[m\n' "Adding repositories" "[OK]"
 
-echo -ne "  Refreshing package repositories..."
+echo -ne "  Updating packages..."
 "${dir}"/lib/spin.sh "${dir}"/lib/package.sh -u 2>/dev/null
-printf '\r%-50s \e[32m%20s\e[m\n' "Refreshing package repositories" "[OK]"
+printf '\r%-50s \e[32m%20s\e[m\n' "Updating packages" "[OK]"
 
 packages=(evolution-ews apt-transport-https code google-chrome-stable gnome-tweaks nodejs)
 for package in "${packages[@]}"; do
@@ -114,9 +114,5 @@ gsettings set org.gnome.settings-daemon.plugins.xsettings hinting 'full'
 gsettings set org.gnome.settings-daemon.plugins.xsettings antialiasing 'rgba'
 printf '\r%-50s \e[32m%20s\e[m\n' "Full font hinting and antialiasing for LCS screens" "[OK]"
 
-printf '\e[33m%s\e[m\n' "System Update:"
-echo -ne "  Running full system update (this will take long time)..."
-sudo apt-get upgrade -y >/dev/null
-printf '\r%-50s \e[32m%20s\e[m\n' "Running full system update" "[OK]"
 printf '\e[33m%s\e[m\n' "Please reboot your system!"
 
