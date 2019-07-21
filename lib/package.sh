@@ -56,7 +56,11 @@ remove_package () {
 	fi
 }
 
-while getopts ":i:v:r:si" options; do
+update_packages () {
+	sudo apt-get update >/dev/null
+}
+
+while getopts ":i:v:r:u" options; do
 	case "${options}" in
 	i)
 		install_package "${OPTARG}" 
@@ -66,6 +70,9 @@ while getopts ":i:v:r:si" options; do
 	;;
 	r)
 		(remove_package "${OPTARG}")
+	;;
+	u)
+		(update_packages "${OPTARG}")
 	;;
 	*)
 		printf '%s\n' "Unknown option -${OPTARG}"

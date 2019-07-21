@@ -93,7 +93,7 @@ printf '\e[33m%s\e[m\n' "Installing additional packages:"
 # add vscode key
 curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | sudo apt-key add -
 sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
-sudo apt-get update
+"${dir}"/lib/spin.sh "${dir}"/lib/package.sh -u 2>/dev/null
 packages=(evolution-ews apt-transport-https code)
 for package in "${packages[@]}"; do
     echo -ne "  Installing ${package}..."
