@@ -63,7 +63,7 @@ echo -ne "  Refreshing package repositories..."
 "${dir}"/lib/spin.sh "${dir}"/lib/package.sh -u 2>/dev/null
 printf '\r%-50s \e[32m%20s\e[m\n' "Refreshing package repositories" "[OK]"
 
-packages=(evolution-ews apt-transport-https code google-chrome-stable gnome-tweaks)
+packages=(evolution-ews apt-transport-https code google-chrome-stable gnome-tweaks nodejs)
 for package in "${packages[@]}"; do
     echo -ne "  Installing ${package}..."
     "${dir}"/lib/spin.sh "${dir}"/lib/package.sh -i "$package" 2>/dev/null
