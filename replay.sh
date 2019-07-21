@@ -61,6 +61,7 @@ fi
 printf '\r%-50s \e[32m%20s\e[m\n' "Preparing nodejs repository..." "[OK]"
 echo -ne "  Installing nodejs and npm tools"
 "${dir}"/lib/spin.sh "${dir}"/lib/package.sh -i "nodejs" 2>/dev/null
+(sudo npm config set unsafe-perm true)
 printf '\r%-50s \e[32m%20s\e[m\n' "Installing nodejs..." "[OK]"
 
 # oh-my-zsh
@@ -74,7 +75,9 @@ echo -ne "  Installing zsh-syntax-highligthing..."
 if [[ ! -d "${HOME}/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting" ]]; then
         "${dir}"/lib/spin.sh git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${HOME}/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting" &>/dev/null
 fi 
+(sudo -S chsh -s '/usr/bin/zsh' "${USER}")
 printf '\r%-50s \e[32m%20s\e[m\n' "Installing zsh-syntax-highlighting..." "[OK]"
+# installing pure-prompt
 echo -ne "  Installing pure-prompt..."
 "${dir}"/lib/spin.sh "${dir}"/lib/npm-package.sh -i "pure-prompt" 2>/dev/null
 (sed -i -e 's/ZSH_THEME=".*"/ZSH_THEME=""/' "${HOME}"/.zshrc)
