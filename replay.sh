@@ -95,14 +95,14 @@ echo -ne "  Adding repositories..."
 curl -sSL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | sudo apt-key add - &>/dev/null 
 sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
 # chrome repo
-wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-
+wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add - &>/dev/null
+sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google.list'
 printf '\r%-50s \e[32m%20s\e[m\n' "Adding repositories..." "[OK]"
 echo -ne "  Refreshing package repositories..."
 "${dir}"/lib/spin.sh "${dir}"/lib/package.sh -u 2>/dev/null
 printf '\r%-50s \e[32m%20s\e[m\n' "Refreshing package repositories..." "[OK]"
 
-packages=(evolution-ews apt-transport-https code google-chrome-stable)
+packages=(evolution-ews apt-transport-https code google-chrome-stable gnome-tweaks)
 for package in "${packages[@]}"; do
     echo -ne "  Installing ${package}..."
     "${dir}"/lib/spin.sh "${dir}"/lib/package.sh -i "$package" 2>/dev/null
