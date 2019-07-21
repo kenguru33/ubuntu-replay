@@ -14,5 +14,4 @@ spinner () {
     tput cnorm
 }
 
-
 spinner "$@"
