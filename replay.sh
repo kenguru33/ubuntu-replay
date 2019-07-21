@@ -38,35 +38,6 @@ for package in "${unwanted_packages[@]}"; do
     printf '\r%-50s \e[32m%20s\e[m\n' "Removing ${package}..." "[OK]"
 done
 
-# nodejs stable
-VERSION=node_10.x # get this live
-DISTRO="$(lsb_release -s -c)"
-printf '\e[33m%s\e[m\n' "Installing nodejs (${VERSION}):"
-echo -ne "  Preparing nodejs repository..."
-if [[ ! -f /etc/apt/sources.list.d/nodesource.list ]]; then 
-    # workaround as I could not figure out how to pass this as an argument to the spinner
-    { curl -sSL https://deb.nodesource.com/gpgkey/nodesource.gpg.key | sudo apt-key add - &>/dev/null; 
-    echo "deb https://deb.nodesource.com/$VERSION $DISTRO main" | sudo tee /etc/apt/sources.list.d/nodesource.list >/dev/null; 
-    echo "deb-src https://deb.nodesource.com/$VERSION $DISTRO main" | sudo tee -a /etc/apt/sources.list.d/nodesource.list >/dev/null; 
-    sudo apt-get update >/dev/null; }&
-    pid=$! # Process Id of the previous running command
-    spin='-\|/'
-    i=0
-    tput civis # hide cursor
-    while kill -0 $pid 2>/dev/null
-    do
-        i=$(( (i+1) %4 ))
-        printf '\r%s' "${spin:$i:1}"
-        sleep .1
-    done
-    tput cnorm # show cursor
-fi
-printf '\r%-50s \e[32m%20s\e[m\n' "Preparing nodejs repository..." "[OK]"
-echo -ne "  Installing nodejs and npm tools"
-"${dir}"/lib/spin.sh "${dir}"/lib/package.sh -i "nodejs" 2>/dev/null
-(sudo npm config set unsafe-perm true)
-printf '\r%-50s \e[32m%20s\e[m\n' "Installing nodejs..." "[OK]"
-
 # oh-my-zsh
 printf '\e[33m%s\e[m\n' "Setting up shell environment:"
 echo -ne "  Installing oh-my-zsh..."
@@ -80,13 +51,6 @@ if [[ ! -d "${HOME}/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting" ]]; then
 fi 
 sudo -S chsh -s '/usr/bin/zsh' "${USER}"
 printf '\r%-50s \e[32m%20s\e[m\n' "Installing zsh-syntax-highlighting..." "[OK]"
-# installing pure-prompt
-echo -ne "  Installing pure-prompt..."
-"${dir}"/lib/spin.sh "${dir}"/lib/npm-package.sh -i "pure-prompt" 2>/dev/null
-(sed -i -e 's/ZSH_THEME=".*"/ZSH_THEME=""/' "${HOME}"/.zshrc)
-(grep -qxF 'autoload -U promptinit; promptinit' "${HOME}"/.zshrc || echo 'autoload -U promptinit; promptinit' >> "${HOME}"/.zshrc)
-(grep -qxF 'prompt pure' "${HOME}"/.zshrc || echo 'prompt pure' >> "${HOME}"/.zshrc)
-printf '\r%-50s \e[32m%20s\e[m\n' "Installing pure-prompt..." "[OK]"
 
 # installing additional packages
 printf '\e[33m%s\e[m\n' "Installing additional packages:"
@@ -97,14 +61,31 @@ sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode s
 # chrome repo
 wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add - &>/dev/null
 sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google.list'
+# nodejs
+VERSION=node_10.x # get this live
+DISTRO="$(lsb_release -s -c)"
+curl -sSL https://deb.nodesource.com/gpgkey/nodesource.gpg.key | sudo apt-key add - &>/dev/null; 
+echo "deb https://deb.nodesource.com/$VERSION $DISTRO main" | sudo tee /etc/apt/sources.list.d/nodesource.list >/dev/null; 
+echo "deb-src https://deb.nodesource.com/$VERSION $DISTRO main" | sudo tee -a /etc/apt/sources.list.d/nodesource.list >/dev/null; 
+
 printf '\r%-50s \e[32m%20s\e[m\n' "Adding repositories..." "[OK]"
+
 echo -ne "  Refreshing package repositories..."
 "${dir}"/lib/spin.sh "${dir}"/lib/package.sh -u 2>/dev/null
 printf '\r%-50s \e[32m%20s\e[m\n' "Refreshing package repositories..." "[OK]"
 
-packages=(evolution-ews apt-transport-https code google-chrome-stable gnome-tweaks)
+packages=(evolution-ews apt-transport-https code google-chrome-stable gnome-tweaks nodejs)
 for package in "${packages[@]}"; do
     echo -ne "  Installing ${package}..."
     "${dir}"/lib/spin.sh "${dir}"/lib/package.sh -i "$package" 2>/dev/null
     printf '\r%-50s \e[32m%20s\e[m\n' "Installing ${package}..." "[OK]"
 done
+
+# installing pure-prompt
+echo -ne "  Installing pure-prompt..."
+(sudo npm config set unsafe-perm true)
+"${dir}"/lib/spin.sh "${dir}"/lib/npm-package.sh -i "pure-prompt" 2>/dev/null
+(sed -i -e 's/ZSH_THEME=".*"/ZSH_THEME=""/' "${HOME}"/.zshrc)
+(grep -qxF 'autoload -U promptinit; promptinit' "${HOME}"/.zshrc || echo 'autoload -U promptinit; promptinit' >> "${HOME}"/.zshrc)
+(grep -qxF 'prompt pure' "${HOME}"/.zshrc || echo 'prompt pure' >> "${HOME}"/.zshrc)
+printf '\r%-50s \e[32m%20s\e[m\n' "Installing pure-prompt..." "[OK]"
