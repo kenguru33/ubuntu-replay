@@ -1,5 +1,8 @@
 #!/bin/bash
 
+echo "Welcome to Ubunut Replay V1.0"
+sudo echo Starting...
+
 dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # installing essentials
@@ -75,7 +78,7 @@ echo -ne "  Installing zsh-syntax-highligthing..."
 if [[ ! -d "${HOME}/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting" ]]; then
         "${dir}"/lib/spin.sh git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${HOME}/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting" &>/dev/null
 fi 
-(sudo -S chsh -s '/usr/bin/zsh' "${USER}")
+sudo -S chsh -s '/usr/bin/zsh' "${USER}"
 printf '\r%-50s \e[32m%20s\e[m\n' "Installing zsh-syntax-highlighting..." "[OK]"
 # installing pure-prompt
 echo -ne "  Installing pure-prompt..."
