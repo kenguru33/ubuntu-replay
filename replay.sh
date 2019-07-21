@@ -90,10 +90,13 @@ printf '\r%-50s \e[32m%20s\e[m\n' "Installing pure-prompt..." "[OK]"
 
 # installing additional packages
 printf '\e[33m%s\e[m\n' "Installing additional packages:"
-# add vscode key
-curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | sudo apt-key add -
+echo -ne "  Adding repositories..."
+curl -sSL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | sudo apt-key add - &>/dev/null 
 sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
+printf '\r%-50s \e[32m%20s\e[m\n' "Adding repositories..." "[OK]"
+echo -ne "  Refreshing package repositories..."
 "${dir}"/lib/spin.sh "${dir}"/lib/package.sh -u 2>/dev/null
+printf '\r%-50s \e[32m%20s\e[m\n' "Refreshing package repositories..." "[OK]"
 packages=(evolution-ews apt-transport-https code)
 for package in "${packages[@]}"; do
     echo -ne "  Installing ${package}..."
