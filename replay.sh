@@ -92,6 +92,7 @@ printf '\r%-50s \e[32m%20s\e[m\n' "Installing pure-prompt..." "[OK]"
 printf '\e[33m%s\e[m\n' "Installing additional packages:"
 # add vscode key
 curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | sudo apt-key add -
+sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
 sudo apt-get update
 packages=(evolution-ews apt-transport-https code)
 for package in "${packages[@]}"; do
