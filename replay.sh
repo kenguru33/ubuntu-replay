@@ -113,3 +113,10 @@ echo -ne "  Full font hinting and antialiasing for LCS screens..."
 gsettings set org.gnome.settings-daemon.plugins.xsettings hinting 'full'
 gsettings set org.gnome.settings-daemon.plugins.xsettings antialiasing 'rgba'
 printf '\r%-50s \e[32m%20s\e[m\n' "Full font hinting and antialiasing for LCS screens" "[OK]"
+
+printf '\e[33m%s\e[m\n' "System Update:"
+echo -ne "  Running full system update (this will take long time)..."
+sudo apt-get upgrade -y >/dev/null
+printf '\r%-50s \e[32m%20s\e[m\n' "Running full system update" "[OK]"
+printf '\e[33m%s\e[m\n' "System will now reboot..."
+sudo reboot
