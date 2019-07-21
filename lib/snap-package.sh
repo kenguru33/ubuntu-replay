@@ -40,7 +40,7 @@ isInstalled () {
 }
 
 isClassic () {
-    [[ "$(snap search "$1" | awk '{print $1 " : "  $4}' | grep -w classic | grep -c "code ")" -eq 1 ]]
+    [[ "$(snap search "$1" | awk '{print $1 " : "  $4}' | grep -w classic | grep -c "$1 ")" -eq 1 ]]
 }
 
 install_package () {
@@ -49,15 +49,15 @@ install_package () {
        exit 1
     fi
     if isClassic "$1"; then 
-        echo sudo snap --clasic install "$1" >/dev/null
+        sudo snap install --classic "$1" >/dev/null
         else
-        echo sudo snap install "$1" >/dev/null
+        sudo snap install "$1" >/dev/null
     fi
 }
 
 remove_package () {
     if (isInstalled "$1"); then 
-        sudo snap remove "$1" >/dev/null
+        sudo snap remove "$1" 
     else
         printf '%s\n' "$1 is not installed. No further action taken." >&2
         exit 1  
