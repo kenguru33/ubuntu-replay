@@ -57,7 +57,7 @@ install_package () {
 
 remove_package () {
     if (isInstalled "$1"); then 
-        sudo snap remove "$1" 
+        sudo snap remove "$1" >/dev/null
     else
         printf '%s\n' "$1 is not installed. No further action taken." >&2
         exit 1  
