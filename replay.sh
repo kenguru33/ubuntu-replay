@@ -1,5 +1,5 @@
 #!/bin/bash
-
+clear
 echo "Welcome to Ubunut Replay V1.0"
 sudo echo Starting... 
 if [[ $? -eq 1 ]];then
