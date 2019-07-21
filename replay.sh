@@ -90,7 +90,10 @@ printf '\r%-50s \e[32m%20s\e[m\n' "Installing pure-prompt..." "[OK]"
 
 # installing additional packages
 printf '\e[33m%s\e[m\n' "Installing additional packages:"
-packages=(evolution-ews)
+# add vscode key
+curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | sudo apt-key add -
+sudo apt-get update
+packages=(evolution-ews apt-transport-https code)
 for package in "${packages[@]}"; do
     echo -ne "  Installing ${package}..."
     "${dir}"/lib/spin.sh "${dir}"/lib/package.sh -i "$package" 2>/dev/null
