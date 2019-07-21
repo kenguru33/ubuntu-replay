@@ -118,5 +118,5 @@ printf '\e[33m%s\e[m\n' "System Update:"
 echo -ne "  Running full system update (this will take long time)..."
 sudo apt-get upgrade -y >/dev/null
 printf '\r%-50s \e[32m%20s\e[m\n' "Running full system update" "[OK]"
-printf '\e[33m%s\e[m\n' "System will now reboot..."
-sudo reboot
+printf '\e[33m%s\e[m\n' "Please reboot your system!"
+
