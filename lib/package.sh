@@ -58,7 +58,7 @@ remove_package () {
 
 update_packages () {
 	sudo apt-get update >/dev/null
-	sudo apt-get upgrade -y
+	sudo apt-get upgrade -y >/dev/null
 }
 
 while getopts ":i:v:r:u" options; do
