@@ -117,9 +117,9 @@ remove_unwanted_packages() {
 shell_environment() {
     # oh-my-zsh
     spinner start "Installing oh-my-zsh..."
-    (if [[ ! -d "${HOME}/.oh-my-zsh" ]]; then
-        sh -c "RUNZSH=no $(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" &>"${dir}/replay.log"
-    fi) &&
+    if [[ ! -d "${HOME}/.oh-my-zsh" ]]; then
+        sh -c "RUNZSH=no CHSH=no $(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" &>"${dir}/replay.log"
+    fi 
     sudo -S chsh -s '/usr/bin/zsh' "${USER}" &>"${dir}/replay.log"
     spinner stop $?    
     
