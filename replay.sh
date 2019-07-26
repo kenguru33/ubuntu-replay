@@ -40,7 +40,7 @@ unwanted_packages=(
 add_repos() {
     # install vscode repository
     spinner start "Adding VSCode repository..."
-    curl -sSL https://packages.microsoft.com/keys/microsoft.asc 2>/dev/null | sudo apt-key add - &>/dev/null &&
+    wget -q -O - https://packages.microsoft.com/keys/microsoft.asc 2>/dev/null | sudo apt-key add - &>/dev/null &&
     echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" | sudo tee /etc/apt/sources.list.d/vscode.list &>/dev/null
     spinner stop $?
     
@@ -54,7 +54,7 @@ add_repos() {
     spinner start "Adding nodesource repository..."
     VERSION=node_10.x # get this live
     DISTRO="$(lsb_release -s -c)"
-    curl -sSL https://deb.nodesource.com/gpgkey/nodesource.gpg.key 2>/dev/null | sudo apt-key add - &>/dev/null &&
+    wget -q -O - https://deb.nodesource.com/gpgkey/nodesource.gpg.key 2>/dev/null | sudo apt-key add - &>/dev/null &&
     echo "deb https://deb.nodesource.com/$VERSION $DISTRO main" | sudo tee /etc/apt/sources.list.d/nodesource.list &>/dev/null &&
     echo "deb-src https://deb.nodesource.com/$VERSION $DISTRO main" | sudo tee -a /etc/apt/sources.list.d/nodesource.list &>/dev/null
     spinner stop $?
