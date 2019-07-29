@@ -1,10 +1,10 @@
 #!/bin/bash
 
 dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-# shellcheck source=lib/ubuntu/package.sh
-source "${dir}/ubuntu/package.sh"
+# shellcheck source=lib/package.sh
+source "${dir}/lib/package.sh"
 # shellcheck source=lib/spinner.sh
-source "${dir}/spinner.sh"
+source "${dir}/lib/spinner.sh"
 
 sudo echo
 

@@ -1,4 +1,4 @@
-#!/bin/bash
+# shellcheck shell=bash
 
 debPackageInstall() {
     local package="$1"

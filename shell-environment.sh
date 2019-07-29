@@ -1,5 +1,10 @@
 #!/bin/bash
-set -o pipefail
+
+dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# shellcheck source=lib/package.sh
+source "${dir}/lib/package.sh"
+# shellcheck source=lib/spinner.sh
+source "${dir}/lib/spinner.sh"
 
 setDefaultShell() {
     local defaultShell="${1:-c}"
@@ -26,13 +31,6 @@ installShellPrompt() {
     grep -qxF 'autoload -U promptinit; promptinit' "${HOME}"/.zshrc || echo 'autoload -U promptinit; promptinit' >> "${HOME}"/.zshrc &&
     grep -qxF 'prompt pure' "${HOME}"/.zshrc || echo 'prompt pure' >> "${HOME}"/.zshrc
 }
-
-dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-
-# shellcheck source=lib/ubuntu/package.sh
-source "${dir}/ubuntu/package.sh"
-# shellcheck source=lib/spinner.sh
-source "${dir}/spinner.sh"
 
 sudo echo
 
