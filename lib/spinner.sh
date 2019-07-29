@@ -24,8 +24,8 @@ spinner(){
 		fi
 	;;
 	*)
-		printf "%s\n" "Invalid arguments"
-		printf "%s\n" "Usage: spinner start <label> <rightMargin> | stop $?"
+		printf "%s\\n" "Invalid arguments"
+		printf "%s\\n" "Usage: spinner start <label> <rightMargin> | stop $?"
 	;;
 	esac
 }
@@ -48,7 +48,7 @@ _stop_spinner() {
 	if [[ "$status" -eq 0 ]]; then
 		printf "[$green%s$nc]\\n" "DONE"
 	else 
-		printf "[ $red%s$nc ]\\n" "FAIL"
+		printf "[$red%s$nc]\\n" "FAIL"
 	fi
 	kill "$_pid" &>/dev/null
 

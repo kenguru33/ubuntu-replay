@@ -116,11 +116,16 @@ remove_unwanted_packages() {
 
 shell_environment() {
     # oh-my-zsh
+    spinner start "Setting default shell environment to ZSH"
+    if [[ $(cat /etc/passwd | grep -w ^${USER} | grep -c /usr/bin/zsh) -eq 0 ]]; then
+        sudo -S chsh -s '/usr/bin/zsh' "${USER}" &>"${dir}/replay.log"
+    fi
+    spinner stop $?
     spinner start "Installing oh-my-zsh..."
     if [[ ! -d "${HOME}/.oh-my-zsh" ]]; then
-        sh -c "RUNZSH=no CHSH=no $(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" &>"${dir}/replay.log"
+        ("RUNZSH=no CHSH=no $(curl -fsSL https://xraw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" &>"${dir}/replay.log")
+        echo $?
     fi 
-    sudo -S chsh -s '/usr/bin/zsh' "${USER}" &>"${dir}/replay.log"
     spinner stop $?    
     
     # syntax-highligthing
