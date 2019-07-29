@@ -19,7 +19,7 @@ debPackageCleanup() {
 }
 
 debPackageRemove() {
-    local $package="$1"
+    local package="$1"
     sudo apt-get --purge remove -y "$package"
     sudo apt-get autoclean
     sudo apt clean
@@ -56,6 +56,7 @@ snapPackageRemove() {
     local package="$1"
     snap remove "$package"
 }
+
 
 
 
