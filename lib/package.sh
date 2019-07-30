@@ -30,17 +30,20 @@ debPackageAddRepoKey() {
     wget -q -O - "$url" | sudo apt-key add -
 }
 
+debPackageRepoIsRegistered() {
+    repo="$1"
+    if [[ "$(ls -A /etc/apt/sources.list.d)" ]]; then
+        [[ $(grep -h ^deb /etc/apt/sources.list /etc/apt/sources.list.d/* | grep -Fc "${repo}") -eq 1 ]]
+    else 
+        [[ $(grep -h ^deb /etc/apt/sources.list | grep -Fc "${repo}") -eq 1 ]]
+    fi
+}
 debPackageAddRepo() {
     repo="$1"
     name="$2"
-    if [[ "$(ls -A /etc/apt/sources.list.d)" ]]; then
-        if [[ $(grep -h ^deb /etc/apt/sources.list /etc/apt/sources.list.d/* | grep -Fc "${repo}") -eq 0 ]]; then
-            echo "${repo}" | sudo tee -a "/etc/apt/sources.list.d/${name}.list"
-        fi
-    else 
-        if [[ $(grep -h ^deb /etc/apt/sources.list | grep -Fc "${repo}") -eq 0 ]]; then
-            echo "${repo}" | sudo tee "/etc/apt/sources.list.d/${name}.list"
-        fi
+
+    if ! debPackageRepoIsRegistered "$repo"; then 
+        echo "${repo}" | sudo tee -a "/etc/apt/sources.list.d/${name}.list"
     fi
 }
 
