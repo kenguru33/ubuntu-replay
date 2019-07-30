@@ -2,9 +2,9 @@
 
 if [[ $ONLINE -eq 1 ]]; then
     # shellcheck source=lib/package.sh
-    source <(wget -qO- "${srcUrl}/lib/package.sh") &>/dev/null
+    source <(wget -qO- "${srcUrl}/lib/package.sh") 
     # shellcheck source=lib/spinner.sh
-    source <(wget -qO- "${srcUrl}/lib/spinner.sh") &>/dev/null
+    source <(wget -qO- "${srcUrl}/lib/spinner.sh") 
 else
     dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
     # shellcheck source=lib/package.sh
@@ -17,7 +17,7 @@ sudo echo
 
 # replace snap packages with native pacage
 spinner start "Fetching installed snap packages..."
-installed_snap_packages=$(snap list | awk '{if (NR!=1) print $1}') >/dev/null
+installed_snap_packages=$(snap list | awk '{if (NR!=1) print $1}')
 spinner stop $?
 for package in $installed_snap_packages; do
     if [[ $(apt-cache search "$package" | grep -wc "$package") -eq 1 ]]; then
