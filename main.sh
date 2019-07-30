@@ -2,7 +2,7 @@
 
 set -o pipefail
 #set -o nounset
-
+export ONLINE=1
 cleanup() {
     unset ONLINE
     unset VERSION
@@ -18,10 +18,9 @@ scripts=(
     "shell-environment.sh"
 )
 
-if [[ ${ONLINE:-1} -eq 1 ]]; then
+if [[ ${ONLINE} -eq 1 ]]; then
     echo "Running Online Scripts"
-    export ONLINE
-    export srcUrl="https://raw.githubusercontent.com/kenguru33/ubuntu-replay/${_version:-master}"
+    export srcUrl="https://raw.githubusercontent.com/kenguru33/ubuntu-replay/master"
     for script in "${scripts[@]}"; do 
         wget -qO- "${srcUrl}/${script}" | bash -s
     done
