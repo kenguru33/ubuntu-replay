@@ -3,16 +3,35 @@
 set -o pipefail
 #set -o nounset
 
-export ONLINE=1
+export ONLINE=0
+_version=develop
 
-dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+scripts=(
+    "package-repos.sh"
+    "package-install.sh"
+    "package-remove.sh"
+    "package-replace.sh"
+    "desktop-environment.sh"
+    "shell-environment.sh"
+)
 
-"${dir}/package-repos.sh"
-"${dir}/package-install.sh"
-"${dir}/package-remove.sh"
-"${dir}/package-replace.sh"
-"${dir}/desktop-environment.sh"
-"${dir}/shell-environment.sh"
+if [[ $ONLINE -eq 1 ]]; then
+    echo "Running Online Scripts"
+    export srcUrl="https://raw.githubusercontent.com/kenguru33/ubuntu-replay/${_version:-master}"
+    for script in "${scripts[@]}"; do 
+        wget -qO- "${srcUrl}/${script}" | bash -s
+    done
+else
+    echo "Running Local scripts"
+    dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+    # shellcheck source=lib/package.sh
+    source "${dir}/lib/package.sh"
+    # shellcheck source=lib/spinner.sh
+    source "${dir}/lib/spinner.sh"
+    for script in "${scripts[@]}"; do
+        ${dir}/${script}
+    done
+fi
 
 
 
