@@ -3,11 +3,6 @@
 set -o pipefail
 #set -o nounset
 export ONLINE=1
-cleanup() {
-    unset ONLINE
-    unset VERSION
-    echo Finsihed! Please log out.
-}
 
 scripts=(
     "package-repos.sh"
@@ -36,4 +31,3 @@ else
     done
 fi
 
-trap cleanup EXIT

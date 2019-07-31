@@ -13,7 +13,7 @@ else
     source "${dir}/lib/spinner.sh"
 fi
 
-sudo echo
+sudo echo "Online: ${ONLINE}"
 
 # replace snap packages with native pacage
 spinner start "Fetching installed snap packages..."
