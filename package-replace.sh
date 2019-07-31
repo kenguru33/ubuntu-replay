@@ -5,12 +5,6 @@ if [[ $ONLINE -eq 1 ]]; then
     source <(wget -qO- "${srcUrl}/lib/package.sh") 
     # shellcheck source=lib/spinner.sh
     source <(wget -qO- "${srcUrl}/lib/spinner.sh") 
-else
-    dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-    # shellcheck source=lib/package.sh
-    source "${dir}/lib/package.sh"
-    # shellcheck source=lib/spinner.sh
-    source "${dir}/lib/spinner.sh"
 fi
 
 sudo echo "Online: ${ONLINE}"
