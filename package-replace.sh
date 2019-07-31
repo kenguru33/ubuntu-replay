@@ -13,6 +13,8 @@ else
     source "${dir}/lib/spinner.sh"
 fi
 
+sudo echo
+
 # replace snap packages with native pacage
 spinner start "Fetching installed snap packages..."
 installed_snap_packages=$(snap list | awk '{if (NR!=1) print $1}')
