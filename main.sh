@@ -3,10 +3,14 @@
 set -o pipefail
 #set -o nounset
 
-export UBUNTU-REPLAY-VERSION="stable"
-export UBUNTU-REPLAY-ONLINE=1
-[[ ${UBUNTU-REPLAY_VERSION} == "stable" ]] && export UBUNTU-REPLAY-SRC-URL="https://raw.githubusercontent.com/kenguru33/ubuntu-replay/master"
-[[ ${UBUNTU-REPLAY_VERSION} == "stable" ]] && export UBUNTU_REPLAY-SRC-URL="https://raw.githubusercontent.com/kenguru33/ubuntu-replay/develop"
+UBUNTU-REPLAY-VERSION="stable"
+UBUNTU-REPLAY-ONLINE=1
+[[ ${UBUNTU-REPLAY_VERSION} == "stable" ]] && UBUNTU-REPLAY-SRC-URL="https://raw.githubusercontent.com/kenguru33/ubuntu-replay/master"
+[[ ${UBUNTU-REPLAY_VERSION} == "stable" ]] && UBUNTU_REPLAY-SRC-URL="https://raw.githubusercontent.com/kenguru33/ubuntu-replay/develop"
+
+export UBUNTU-REPLAY-VERSION
+export UBUNTU-REPLAY-ONLINE
+export UBUNTU-REPLAY-SRC-URL
 
 scripts=(
     "package-repos.sh"
