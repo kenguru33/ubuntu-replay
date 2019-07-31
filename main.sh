@@ -3,14 +3,14 @@
 set -o pipefail
 #set -o nounset
 
-UBUNTU-REPLAY-VERSION=stable
-UBUNTU-REPLAY-ONLINE=1
-[[ ${UBUNTU-REPLAY_VERSION} == "stable" ]] && UBUNTU-REPLAY-SRC-URL="https://raw.githubusercontent.com/kenguru33/ubuntu-replay/master"
-[[ ${UBUNTU-REPLAY_VERSION} == "stable" ]] && UBUNTU_REPLAY-SRC-URL="https://raw.githubusercontent.com/kenguru33/ubuntu-replay/develop"
+UBUNTU_REPLAY_VERSION="stable"
+UBUNTU_REPLAY_ONLINE="1"
+[[ ${UBUNTU_REPLAY_VERSION} == "stable" ]] && UBUNTU_REPLAY_SRC_URL="https://raw.githubusercontent.com/kenguru33/ubuntu-replay/master"
+[[ ${UBUNTU_REPLAY_VERSION} == "stable" ]] && UBUNTU_REPLAY_SRC_URL="https://raw.githubusercontent.com/kenguru33/ubuntu-replay/develop"
 
-export UBUNTU-REPLAY-VERSION
-export UBUNTU-REPLAY-ONLINE
-export UBUNTU-REPLAY-SRC-URL
+export UBUNTU_REPLAY_VERSION
+export UBUNTU_REPLAY_ONLINE
+export UBUNTU_REPLAY_SRC_URL
 
 scripts=(
     "package-repos.sh"
@@ -21,7 +21,7 @@ scripts=(
     "shell-environment.sh"
 )
 
-if [[ "$UBUNTU-REPLAY-ONLINE" -eq 1 ]]; then
+if [[ "$UBUNTU_REPLAY_ONLINE" -eq 1 ]]; then
     echo "Running Online Scripts"
     for script in "${scripts[@]}"; do 
         wget -qO- "${SRC-URL}/${script}" | bash -s

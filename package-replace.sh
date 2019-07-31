@@ -1,10 +1,10 @@
 #!/bin/bash
 
-if [[ "$UBUNTU-REPLAY-ONLINE" -eq 1 ]]; then
+if [[ "$UBUNTU_REPLAY_ONLINE" -eq 1 ]]; then
     # shellcheck source=lib/package.sh
-    source <(wget -qO- "${UBUNTU-REPLAY-SRC-URL}/lib/package.sh") 
+    source <(wget -qO- "${UBUNTU_REPLAY_SRC_URL}/lib/package.sh") &>/dev/null
     # shellcheck source=lib/spinner.sh
-    source <(wget -qO- "${UBUNTU-REPLAY-SRC-URL}/lib/spinner.sh") 
+    source <(wget -qO- "${UBUNTU_REPLAY_SRC_URL}/lib/spinner.sh") &>/dev/null
 else
     dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
     # shellcheck source=lib/package.sh
