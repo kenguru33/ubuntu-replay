@@ -6,11 +6,13 @@ set -o pipefail
 UBUNTU_REPLAY_VERSION="stable"
 UBUNTU_REPLAY_ONLINE=1
 [[ ${UBUNTU_REPLAY_VERSION} == "stable" ]] && UBUNTU_REPLAY_SRC_URL="https://raw.githubusercontent.com/kenguru33/ubuntu-replay/master"
-[[ ${UBUNTU_REPLAY_VERSION} == "stable" ]] && UBUNTU_REPLAY_SRC_URL="https://raw.githubusercontent.com/kenguru33/ubuntu-replay/develop"
+[[ ${UBUNTU_REPLAY_VERSION} == "develop" ]] && UBUNTU_REPLAY_SRC_URL="https://raw.githubusercontent.com/kenguru33/ubuntu-replay/develop"
 
 export UBUNTU_REPLAY_VERSION
 export UBUNTU_REPLAY_ONLINE
 export UBUNTU_REPLAY_SRC_URL
+
+echo $UBUNTU_REPLAY_SRC_URL
 
 scripts=(
     "package-repos.sh"
