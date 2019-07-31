@@ -5,6 +5,12 @@ if [[ $ONLINE -eq 1 ]]; then
     source <(wget -qO- "${srcUrl}/lib/package.sh") 
     # shellcheck source=lib/spinner.sh
     source <(wget -qO- "${srcUrl}/lib/spinner.sh") 
+else
+    dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+    # shellcheck source=lib/package.sh
+    source "${dir}/lib/package.sh"
+    # shellcheck source=lib/spinner.sh
+    source "${dir}/lib/spinner.sh"
 fi
 
 # replace snap packages with native pacage
@@ -13,7 +19,6 @@ installed_snap_packages=$(snap list | awk '{if (NR!=1) print $1}')
 spinner stop $?
 for package in $installed_snap_packages; do
     if [[ $(apt-cache search "$package" | grep -wc "$package") -eq 1 ]]; then
-        echo "inside for loop and if: ${srcUrl}"
         spinner start "Replacing $package"
         debPackageInstall "$package" &&
         snapPackageRemove "$package"

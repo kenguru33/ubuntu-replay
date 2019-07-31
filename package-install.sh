@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 if [[ "$ONLINE" -eq 1 ]]; then
     # shellcheck source=lib/package.sh
     source <(wget -qO- "${srcUrl}/lib/package.sh") &>/dev/null
