@@ -3,7 +3,7 @@
 set -o pipefail
 #set -o nounset
 
-UBUNTU_REPLAY_VERSION=stable
+UBUNTU_REPLAY_VERSION="stable"
 UBUNTU_REPLAY_ONLINE=1
 [[ ${UBUNTU_REPLAY_VERSION} == "stable" ]] && UBUNTU_REPLAY_SRC_URL="https://raw.githubusercontent.com/kenguru33/ubuntu-replay/master"
 [[ ${UBUNTU_REPLAY_VERSION} == "stable" ]] && UBUNTU_REPLAY_SRC_URL="https://raw.githubusercontent.com/kenguru33/ubuntu-replay/develop"
