@@ -19,6 +19,7 @@ unwanted_packages=(
     gnome-shell-extension-ubuntu-dock
     gnome-shell-extension-desktop-icons
     gnome-shell-extension-appindicator
+    thunderbird
 )
 
 for package in "${unwanted_packages[@]}"; do
