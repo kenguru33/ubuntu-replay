@@ -22,7 +22,7 @@ spinner stop $?
 
 spinner start "Adding Google Chrome repository..."
     debPackageAddRepoKey "https://dl.google.com/linux/linux_signing_key.pub" &>/dev/null &&
-    debPackageAddRepo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" "google" &>/dev/null
+    debPackageAddRepo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" "google-chrome" &>/dev/null
 spinner stop $?
 
 spinner start "Adding nodesource repository..."

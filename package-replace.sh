@@ -22,8 +22,8 @@ spinner stop $?
 for package in $installed_snap_packages; do
     if [[ $(apt-cache search "$package" | grep -wc "$package") -eq 1 ]]; then
         spinner start "Replacing $package"
-        debPackageInstall "$package" &&
-        snapPackageRemove "$package"
+        debPackageInstall "$package" &>/dev/null &&
+        snapPackageRemove "$package" &>/dev/null
         spinner stop $?
     fi
 done
