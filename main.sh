@@ -24,7 +24,7 @@ scripts=(
 if [[ "$UBUNTU_REPLAY_ONLINE" -eq 1 ]]; then
     echo "Running Online Scripts"
     for script in "${scripts[@]}"; do 
-        wget -qO- "${SRC-URL}/${script}" | bash -s
+        wget -qO- "${UBUNTU_REPLAY_SRC_URL}/${script}" | bash -s
     done
 else
     echo "Running Local scripts"
