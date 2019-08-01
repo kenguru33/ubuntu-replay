@@ -1,6 +1,6 @@
 # shellcheck shell=bash
 
-PACKAGES=(
+export PACKAGES=(
     git
     build-essential
     vim
@@ -14,12 +14,12 @@ PACKAGES=(
     gnome-tweaks
 )
 
-SNAP_PACKAGES=(
+export SNAP_PACKAGES=(
     spotify
     slack
 )
 
-REMOVE_PACKAGES=(
+export REMOVE_PACKAGES=(
     gnome-shell-extension-ubuntu-dock
     gnome-shell-extension-desktop-icons
     gnome-shell-extension-appindicator
@@ -27,22 +27,22 @@ REMOVE_PACKAGES=(
 )
 
 # web url supported only - images downloaded to ~/.wallpaper/{wallpaper.jpg, lockscreen.jpg} 
-IMAGE_URL_DESKTOP="https://unsplash.com/photos/PwzISwC2kLs/download?force=true"
-IMAGE_URL_LOCKSCREEN="https://unsplash.com/photos/z1x7Pq1Bxbg/download?force=true"
+export IMAGE_URL_DESKTOP="https://unsplash.com/photos/PwzISwC2kLs/download?force=true"
+export IMAGE_URL_LOCKSCREEN="https://unsplash.com/photos/z1x7Pq1Bxbg/download?force=true"
 
-BUTTON_LAYOUT=":close" # :close:maximize:minimize
-TAP_TO_CLICK="true" # true | false
-FONT_HINTING="full"
-FONT_ANTIALIASING="rgba"
+export BUTTON_LAYOUT=":close" # :close:maximize:minimize
+export TAP_TO_CLICK="true" # true | false
+export FONT_HINTING="full"
+export FONT_ANTIALIASING="rgba"
 
-declare -A REPO_KEY=(
-    [nodjs]=""
-    [google-chrome]=""
-    [code]=""
+export REPO_KEY=(
+    #[nodjs]=""
+    #[google-chrome]=""
+    #[code]=""
 )
 
-declare -A REPO_URL=(
-    [nodjs]=""
-    [google-chrome]=""
-    [code]=""
+export REPO_URL=(
+    #[nodjs]=""
+    #[google-chrome]=""
+    #[code]=""
 )
