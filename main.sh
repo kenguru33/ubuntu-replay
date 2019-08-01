@@ -3,8 +3,20 @@
 set -o pipefail
 #set -o nounset
 
-UBUNTU_REPLAY_VERSION="stable"
+cleanup() {
+    unset UBUNTU_REPLAY_VERSION
+    unset UBUNTU_REPLAY_ONLINE
+    unset UBUNTU_REPLAY_SRC_URL
+    #echo "UBUNTU_REPLAY_VERSION: ${UBUNTU_REPLAY_VERSION}"
+    #echo "UBUNTU_REPLAY_ONLINE: ${UBUNTU_REPLAY_ONLINE}"
+    #echo "UBUNTU_REPLAY_SRC_URL: ${UBUNTU_REPLAY_SRC}" 
+}
+
+trap cleanup EXIT
+
+[[ -z ${UBUNTU_REPLAY_VERSION} ]] && UBUNTU_REPLAY_VERSION="stable"
 UBUNTU_REPLAY_ONLINE=1
+
 [[ ${UBUNTU_REPLAY_VERSION} == "stable" ]] && UBUNTU_REPLAY_SRC_URL="https://raw.githubusercontent.com/kenguru33/ubuntu-replay/master"
 [[ ${UBUNTU_REPLAY_VERSION} == "develop" ]] && UBUNTU_REPLAY_SRC_URL="https://raw.githubusercontent.com/kenguru33/ubuntu-replay/develop"
 
@@ -24,7 +36,7 @@ scripts=(
 )
 
 if [[ "$UBUNTU_REPLAY_ONLINE" -eq 1 ]]; then
-    echo "Running Online Scripts"
+    echo "Running Online Scripts (${UBUNTU_REPLAY_VERSION})"
     for script in "${scripts[@]}"; do 
         wget -qO- "${UBUNTU_REPLAY_SRC_URL}/${script}" | bash -s
     done
@@ -39,4 +51,5 @@ else
         "${dir}/${script}"
     done
 fi
+
 
