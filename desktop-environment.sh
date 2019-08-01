@@ -1,5 +1,9 @@
 #!/bin/bash
 
+set -o pipefail
+set -o errexit
+set -o nounset
+
 if [[ "$UBUNTU_REPLAY_ONLINE" -eq 1 ]]; then
     # shellcheck source=lib/package.sh
     source <(wget -qO- "${UBUNTU_REPLAY_SRC_URL}/lib/package.sh") &>/dev/null

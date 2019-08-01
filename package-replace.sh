@@ -1,5 +1,8 @@
 #!/bin/bash
 
+set -o pipefail
+set -o nounset
+
 if [[ "$UBUNTU_REPLAY_ONLINE" -eq 1 ]]; then
     # shellcheck source=lib/package.sh
     source <(wget -qO- "${UBUNTU_REPLAY_SRC_URL}/lib/package.sh") &>/dev/null
@@ -13,7 +16,7 @@ else
     source "${dir}/lib/spinner.sh"
 fi
 
-sudo echo
+sudo echo || exit 1
 
 # replace snap packages with native pacage
 spinner start "Fetching installed snap packages..."

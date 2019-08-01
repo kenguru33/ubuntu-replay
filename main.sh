@@ -1,6 +1,7 @@
 #!/bin/bash
 
 set -o pipefail
+set -o errexit
 #set -o nounset
 
 cleanup() {
@@ -15,7 +16,7 @@ cleanup() {
 trap cleanup EXIT
 
 [[ -z ${UBUNTU_REPLAY_VERSION} ]] && UBUNTU_REPLAY_VERSION="stable"
-UBUNTU_REPLAY_ONLINE=1
+[[ -z ${UBUNTU_REPLAY_ONLINE} ]] && UBUNTU_REPLAY_ONLINE=1
 
 [[ ${UBUNTU_REPLAY_VERSION} == "stable" ]] && UBUNTU_REPLAY_SRC_URL="https://raw.githubusercontent.com/kenguru33/ubuntu-replay/master"
 [[ ${UBUNTU_REPLAY_VERSION} == "develop" ]] && UBUNTU_REPLAY_SRC_URL="https://raw.githubusercontent.com/kenguru33/ubuntu-replay/develop"
@@ -24,7 +25,7 @@ export UBUNTU_REPLAY_VERSION
 export UBUNTU_REPLAY_ONLINE
 export UBUNTU_REPLAY_SRC_URL
 
-echo "Welcome to Ubuntu Replay V1.0"
+sudo echo "Welcome to Ubuntu Replay V1.0" || exit 1
 
 scripts=(
     "package-repos.sh"
