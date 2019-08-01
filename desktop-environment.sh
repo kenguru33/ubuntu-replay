@@ -1,16 +1,19 @@
 #!/bin/bash
 
 set -o pipefail
-set -o errexit
-set -o nounset
+# set -o nounset
 
 if [[ "$UBUNTU_REPLAY_ONLINE" -eq 1 ]]; then
     # shellcheck source=lib/package.sh
     source <(wget -qO- "${UBUNTU_REPLAY_SRC_URL}/lib/package.sh") &>/dev/null
     # shellcheck source=lib/spinner.sh
     source <(wget -qO- "${UBUNTU_REPLAY_SRC_URL}/lib/spinner.sh") &>/dev/null
+    # shellcheck source=manifest.sh
+    source <(wget -qO- "${UBUNTU_REPLAY_SRC_URL}/manifest.sh") &>/dev/null
 else
     dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+    # shellcheck source=manifest.sh
+    source "${dir}/manifest.sh"
     # shellcheck source=lib/package.sh
     source "${dir}/lib/package.sh"
     # shellcheck source=lib/spinner.sh
@@ -29,24 +32,24 @@ wallpaper() {
     wget "$IMAGE_URL_DESKTOP" -O "$FILE_DESKTOP" &>/dev/null
     # set the desktop background
     URI="file:///${FILE_DESKTOP}"
-    gsettings set org.gnome.desktop.background picture-uri "${URI}"
+    gsettings set org.gnome.desktop.background picture-uri "${URI}" &>/dev/null
     # set the desktop lockscreen
     wget "$IMAGE_URL_LOCKSCREEN" -O "$FILE_LOCKSCREEN" &>/dev/null
     URI="file:///${FILE_LOCKSCREEN}"
-    gsettings set org.gnome.desktop.screensaver picture-uri "${URI}"
+    gsettings set org.gnome.desktop.screensaver picture-uri "${URI}" &>/dev/null
 }
 
 sudo echo
 
-spinner start "Setting windows button to close only..."
-gsettings set org.gnome.desktop.wm.preferences button-layout ":close"
+spinner start "Setting windows buttons to $BUTTON_LAYOUT"
+gsettings set org.gnome.desktop.wm.preferences button-layout "${BUTTON_LAYOUT}" &>/dev/null
 spinner stop $?
 spinner start "Setting touchpad to tap to click..."
-gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click 'true'
+gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click "$TAP_TO_CLICK" &>/dev/null
 spinner stop $?
 spinner start "Setting full font hinting and antialiasing for LCS screens..."
-gsettings set org.gnome.settings-daemon.plugins.xsettings hinting 'full' &&
-gsettings set org.gnome.settings-daemon.plugins.xsettings antialiasing 'rgba'
+gsettings set org.gnome.settings-daemon.plugins.xsettings hinting "$FONT_HINTING" &>/dev/null &&
+gsettings set org.gnome.settings-daemon.plugins.xsettings antialiasing "$FONT_ANTIALIASING" &>/dev/null
 spinner stop $?
 spinner start "Set wallpaper..."
 wallpaper

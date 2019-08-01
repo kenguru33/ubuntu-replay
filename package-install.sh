@@ -8,8 +8,12 @@ if [[ "$UBUNTU_REPLAY_ONLINE" -eq 1 ]]; then
     source <(wget -qO- "${UBUNTU_REPLAY_SRC_URL}/lib/package.sh") &>/dev/null
     # shellcheck source=lib/spinner.sh
     source <(wget -qO- "${UBUNTU_REPLAY_SRC_URL}/lib/spinner.sh") &>/dev/null
+    # shellcheck source=manifest.sh
+    source <(wget -qO- "${UBUNTU_REPLAY_SRC_URL}/manifest.sh") &>/dev/null
 else
     dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+    # shellcheck source=manifest.sh
+    source ${dir}/manifest.sh
     # shellcheck source=lib/package.sh
     source "${dir}/lib/package.sh"
     # shellcheck source=lib/spinner.sh
@@ -18,26 +22,11 @@ fi
 
 sudo echo || exit 1
 
-packages=(
-    git
-    build-essential
-    vim
-    curl
-    zsh
-    nodejs
-    google-chrome-stable
-    code
-    evolution-ews
-    apt-transport-https
-    gnome-tweaks
-)
+# set data from manifest
+packages=( "${PACKAGES[@]}" )
+snap_packages=( "${SNAP_PACKAGES[@]}")
 
-snap_packages=(
-    spotify
-    slack
-)
-
-# check for required repos here!!!
+# check for required repos here!!! # remove this when manifest is in place
 if ! debPackageRepoIsRegistered "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"; then 
     echo "Required repos not registered. Run package-repos.sh to add them."
     exit 1
