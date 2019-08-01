@@ -3,7 +3,7 @@
 set -o pipefail
 set -o nounset
 
-if [[ "$UBUNTU_REPLAY_ONLINE" -eq 1 ]]; then
+if [[ "${UBUNTU_REPLAY_ONLINE:-}" -eq 1 ]]; then
     # shellcheck source=lib/package.sh
     source <(wget -qO- "${UBUNTU_REPLAY_SRC_URL}/lib/package.sh") &>/dev/null
     # shellcheck source=lib/spinner.sh
@@ -13,7 +13,7 @@ if [[ "$UBUNTU_REPLAY_ONLINE" -eq 1 ]]; then
 else
     dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
     # shellcheck source=manifest.sh
-    source ${dir}/manifest.sh
+    source "${dir}/manifest.sh"
     # shellcheck source=lib/package.sh
     source "${dir}/lib/package.sh"
     # shellcheck source=lib/spinner.sh
