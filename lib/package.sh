@@ -57,7 +57,7 @@ snapPackageInstall() {
 
 snapPackageRemove() {
     local package="$1"
-    snap remove "$package"
+    sudo snap remove "$package"
 }
 
 
