@@ -45,6 +45,13 @@ defaultEditor() {
     fi
 }
 
+terminalColor() {
+  defaultProfileUUID=""
+  defaultProfileUUID=$(gsettings get org.gnome.Terminal.ProfilesList default)
+  defaultProfileUUID=${defaultProfileUUID:1:-1}
+  dconf write "/org/gnome/terminal/legacy/profiles:/:${defaultProfileUUID}/use-theme-colors" false
+}
+
 sudo echo
 
 spinner start "Setting windows buttons to $BUTTON_LAYOUT"
@@ -62,4 +69,7 @@ wallpaper
 spinner stop $?
 spinner start "Setting default editor..."
 defaultEditor
+spinner stop $?
+spinner start "Disabling colors from system theme on terminal..."
+terminalColor
 spinner stop $?
