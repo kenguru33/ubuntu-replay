@@ -17,6 +17,7 @@ export PACKAGES=(
 export SNAP_PACKAGES=(
     spotify
     slack
+    webstorm
 )
 
 export REMOVE_PACKAGES=(
@@ -35,14 +36,17 @@ export TAP_TO_CLICK="true" # true | false
 export FONT_HINTING="full"
 export FONT_ANTIALIASING="rgba"
 
-export REPO_KEY=(
-    #[nodjs]=""
-    #[google-chrome]=""
-    #[code]=""
+export -A REPO_KEY=(
+    [nodejs]="https://deb.nodesource.com/gpgkey/nodesource.gpg.key"
+    [google-chrome]="https://dl.google.com/linux/linux_signing_key.pub"
+    [vscode]="https://packages.microsoft.com/keys/microsoft.asc"
 )
 
-export REPO_URL=(
-    #[nodjs]=""
-    #[google-chrome]=""
-    #[code]=""
+export -A REPO_DEB=(
+    [nodejs]="deb https://deb.nodesource.com/node_10.x disco main" 
+    [google-chrome]="deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main"
+    [vscode]="deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
+)
+export -A REPO_DEB_SRC=(
+    [nodejs]="deb-src https://deb.nodesource.com/node_10.x disco main"
 )

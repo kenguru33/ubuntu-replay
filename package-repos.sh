@@ -22,25 +22,24 @@ fi
 
 sudo echo || exit 1
 
+for key in "${!REPO_KEY[@]}"; do
+    spinner start "Add repository signing key ${key}..."
+    debPackageAddRepoKey "${REPO_KEY["$key"]}" &>/dev/null
+    spinner stop $?
+done
 
-spinner start "Adding VSCode repository..."
-    debPackageAddRepoKey "https://packages.microsoft.com/keys/microsoft.asc" &>/dev/null &&
-    debPackageAddRepo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" "vscode" &>/dev/null
-spinner stop $?
+for repo in "${!REPO_DEB[@]}"; do
+    spinner start "Add binary repository for ${repo}..."
+    debPackageAddRepo "${REPO_DEB["$repo"]}" "$repo" &>/dev/null
+    spinner stop $?
+done
 
-spinner start "Adding Google Chrome repository..."
-    debPackageAddRepoKey "https://dl.google.com/linux/linux_signing_key.pub" &>/dev/null &&
-    debPackageAddRepo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" "google-chrome" &>/dev/null
-spinner stop $?
-
-spinner start "Adding nodesource repository..."
-    VERSION=node_10.x # get this live
-    DISTRO="$(lsb_release -s -c)"
-    debPackageAddRepoKey "https://deb.nodesource.com/gpgkey/nodesource.gpg.key" &>/dev/null &&
-    debPackageAddRepo "deb https://deb.nodesource.com/$VERSION $DISTRO main" "nodesource" &>/dev/null &&
-    debPackageAddRepo "deb-src https://deb.nodesource.com/$VERSION $DISTRO main" "nodesource" &>/dev/null
-spinner stop $?
+for repo in "${!REPO_DEB_SRC[@]}"; do
+    spinner start "Add source repository for ${repo}..."
+    debPackageAddRepo "${REPO_DEB_SRC["$repo"]}" "$repo" &>/dev/null
+    spinner stop $?
+done
 
 spinner start "Retrieve new lists of packages..."
-    debPackageUpdate &>/dev/null
+debPackageUpdate &>/dev/null
 spinner stop $?

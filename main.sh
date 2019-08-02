@@ -2,12 +2,12 @@
 
 set -o pipefail
 set -o errexit
-#set -o nounset
 
 cleanup() {
     unset UBUNTU_REPLAY_VERSION
     unset UBUNTU_REPLAY_ONLINE
     unset UBUNTU_REPLAY_SRC_URL
+    spinner stop $?
     #echo "UBUNTU_REPLAY_VERSION: ${UBUNTU_REPLAY_VERSION}"
     #echo "UBUNTU_REPLAY_ONLINE: ${UBUNTU_REPLAY_ONLINE}"
     #echo "UBUNTU_REPLAY_SRC_URL: ${UBUNTU_REPLAY_SRC}" 
