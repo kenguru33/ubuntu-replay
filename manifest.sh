@@ -51,4 +51,4 @@ export -A REPO_DEB_SRC=(
     [nodejs]="deb-src https://deb.nodesource.com/node_10.x disco main"
 )
 
-# export DEFAULT_EDITOR="/usr/bin/vim.basic"
+export DEFAULT_EDITOR="/usr/bin/vim.basic"
