@@ -52,6 +52,10 @@ terminalColor() {
   dconf write "/org/gnome/terminal/legacy/profiles:/:${defaultProfileUUID}/use-theme-colors" false
 }
 
+theme() {
+  gsettings set org.gnome.desktop.interface gtk-theme "Yaru-dark"
+}
+
 sudo echo
 
 spinner start "Setting windows buttons to $BUTTON_LAYOUT"
@@ -72,4 +76,7 @@ defaultEditor
 spinner stop $?
 spinner start "Disabling colors from system theme on terminal..."
 terminalColor
+spinner stop $?
+spinner start "Set theme..."
+theme
 spinner stop $?
