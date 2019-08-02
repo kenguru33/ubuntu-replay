@@ -39,6 +39,12 @@ wallpaper() {
     gsettings set org.gnome.desktop.screensaver picture-uri "${URI}" &>/dev/null
 }
 
+defaultEditor() {
+    if [[ ! -z "${DEFAULT_EDITOR:-}" ]]; then 
+        sudo update-alternatives --set editor "${DEFAULT_EDITOR}"
+    fi
+}
+
 sudo echo
 
 spinner start "Setting windows buttons to $BUTTON_LAYOUT"
@@ -51,6 +57,9 @@ spinner start "Setting full font hinting and antialiasing for LCS screens..."
 gsettings set org.gnome.settings-daemon.plugins.xsettings hinting "$FONT_HINTING" &>/dev/null &&
 gsettings set org.gnome.settings-daemon.plugins.xsettings antialiasing "$FONT_ANTIALIASING" &>/dev/null
 spinner stop $?
-spinner start "Set wallpaper..."
+spinner start "Setting wallpaper..."
 wallpaper
+spinner stop $?
+spinner start "Setting default editor..."
+defaultEditor
 spinner stop $?
