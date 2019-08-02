@@ -56,6 +56,10 @@ theme() {
   gsettings set org.gnome.desktop.interface gtk-theme "Yaru-dark"
 }
 
+iconSize() {
+  gsettings set org.gnome.nautilus.icon-view default-zoom-level 'large'
+}
+
 sudo echo
 
 spinner start "Setting windows buttons to $BUTTON_LAYOUT"
@@ -79,4 +83,7 @@ terminalColor
 spinner stop $?
 spinner start "Set theme..."
 theme
+spinner stop $?
+spinner start "Set nautilus icon size"
+iconSize
 spinner stop $?
