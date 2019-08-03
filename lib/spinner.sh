@@ -8,7 +8,7 @@ nc="\\e[0m"
 spinner(){
 	case $1 in
 	start)
-		declare -i rightMargin="${3:-48}"
+		declare -i rightMargin="${3:-8}"
 		_label="${2:-Doing some work...}"
 		_column=$(( $(tput cols)-${#_label}-rightMargin ))
 		_start_spinner &
