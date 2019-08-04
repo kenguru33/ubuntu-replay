@@ -4,12 +4,12 @@ set -o pipefail
 set -o errexit
 
 cleanup() {
-    unset UBUNTU_REPLAY_VERSION
-    unset UBUNTU_REPLAY_ONLINE
-    unset UBUNTU_REPLAY_SRC_URL
-    #echo "UBUNTU_REPLAY_VERSION: ${UBUNTU_REPLAY_VERSION}"
-    #echo "UBUNTU_REPLAY_ONLINE: ${UBUNTU_REPLAY_ONLINE}"
-    #echo "UBUNTU_REPLAY_SRC_URL: ${UBUNTU_REPLAY_SRC}" 
+    exitCode=$?
+    if [[ "$exitCode" -eq 0 ]]; then
+        echo
+        echo -n "Ubuntu replay finnished! "
+        echo "Log out to make the changes effective." 
+    fi
 }
 
 trap cleanup EXIT

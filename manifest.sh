@@ -12,6 +12,7 @@ export PACKAGES=(
     evolution-ews
     apt-transport-https
     gnome-tweaks
+    chrome-gnome-shell
 )
 
 export SNAP_PACKAGES=(
@@ -52,3 +53,11 @@ export -A REPO_DEB_SRC=(
 )
 
 export DEFAULT_EDITOR="/usr/bin/vim.basic"
+
+export GNOME_EXTENSIONS=(
+    906 # sound input output selector
+    517 # caffeine
+    779 # clipboard-indicator
+    690 # easyscreencast
+    779 # clipboardindicator
+)

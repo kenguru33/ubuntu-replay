@@ -10,6 +10,8 @@ if [[ "${UBUNTU_REPLAY_ONLINE:-}" -eq 1 ]]; then
     source <(wget -qO- "${UBUNTU_REPLAY_SRC_URL}/lib/spinner.sh") &>/dev/null
     # shellcheck source=manifest.sh
     source <(wget -qO- "${UBUNTU_REPLAY_SRC_URL}/manifest.sh") &>/dev/null
+    # shellcheck source=lib/gnome-extension.sh
+    source <(wget -qO- "${UBUNTU_REPLAY_SRC_URL}/gnome-extension.sh") &/dev/null
 else
     dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
     # shellcheck source=manifest.sh
@@ -18,6 +20,8 @@ else
     source "${dir}/lib/package.sh"
     # shellcheck source=lib/spinner.sh
     source "${dir}/lib/spinner.sh"
+    # shellcheck source=lib/gnome-extension.sh
+    source "${dir}/lib/gnome-extension.sh"
 fi
 
 wallpaper() {
@@ -60,6 +64,12 @@ iconSize() {
   gsettings set org.gnome.nautilus.icon-view default-zoom-level 'large'
 }
 
+gnomeExtensions () {
+  for extension in "${GNOME_EXTENSIONS[@]}"; do
+    extensionInstall "$extension" &>/dev/null
+  done
+}
+
 sudo echo
 
 spinner start "Setting windows buttons to $BUTTON_LAYOUT"
@@ -86,4 +96,7 @@ theme
 spinner stop $?
 spinner start "Set nautilus icon size"
 iconSize
+spinner stop $?
+spinner start "Installing gnome extensions..."
+gnomeExtensions
 spinner stop $?
