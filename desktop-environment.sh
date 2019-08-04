@@ -11,7 +11,7 @@ if [[ "${UBUNTU_REPLAY_ONLINE:-}" -eq 1 ]]; then
     # shellcheck source=manifest.sh
     source <(wget -qO- "${UBUNTU_REPLAY_SRC_URL}/manifest.sh") &>/dev/null
     # shellcheck source=lib/gnome-extension.sh
-    source <(wget -qO- "${UBUNTU_REPLAY_SRC_URL}/gnome-extension.sh") &/dev/null
+    source <(wget -qO- "${UBUNTU_REPLAY_SRC_URL}/lib/gnome-extension.sh") &/dev/null
 else
     dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
     # shellcheck source=manifest.sh
