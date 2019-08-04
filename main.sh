@@ -7,7 +7,7 @@ cleanup() {
     exitCode=$?
     if [[ "$exitCode" -eq 0 ]]; then
         echo
-        echo -n "Ubuntu replay finnished! "
+        echo -n "Ubuntu is now replayed! "
         echo "Log out to make the changes effective." 
     fi
 }
@@ -33,6 +33,7 @@ scripts=(
     "package-replace.sh"
     "desktop-environment.sh"
     "shell-environment.sh"
+    "gnome-extension-install.sh"
 )
 
 if [[ "$UBUNTU_REPLAY_ONLINE" -eq 1 ]]; then

@@ -28,7 +28,7 @@ wallpaper() {
     local IMAGE_URL_DESKTOP="https://unsplash.com/photos/PwzISwC2kLs/download?force=true"
     local IMAGE_URL_LOCKSCREEN="https://unsplash.com/photos/z1x7Pq1Bxbg/download?force=true"
     local WALLPAPER_DIRECTORY="${HOME}/.wallpaper"
-    local FILE_DESKTOP="${WALLPAPER_DIRECTORY}/wallpaper.jpg"    
+    local FILE_DESKTOP="${WALLPAPER_DIRECTORY}/wallpaper.jpg"
     local FILE_LOCKSCREEN="${WALLPAPER_DIRECTORY}/lockscreen.jpg"
     if [[ ! -d "$WALLPAPER_DIRECTORY" ]]; then
         mkdir "$WALLPAPER_DIRECTORY"
@@ -44,30 +44,24 @@ wallpaper() {
 }
 
 defaultEditor() {
-    if [[ ! -z "${DEFAULT_EDITOR:-}" ]]; then 
+    if [[ ! -z "${DEFAULT_EDITOR:-}" ]]; then
         sudo update-alternatives --set editor "${DEFAULT_EDITOR}"
     fi
 }
 
 terminalColor() {
-  defaultProfileUUID=""
-  defaultProfileUUID=$(gsettings get org.gnome.Terminal.ProfilesList default)
-  defaultProfileUUID=${defaultProfileUUID:1:-1}
-  dconf write "/org/gnome/terminal/legacy/profiles:/:${defaultProfileUUID}/use-theme-colors" false
+    defaultProfileUUID=""
+    defaultProfileUUID=$(gsettings get org.gnome.Terminal.ProfilesList default)
+    defaultProfileUUID=${defaultProfileUUID:1:-1}
+    dconf write "/org/gnome/terminal/legacy/profiles:/:${defaultProfileUUID}/use-theme-colors" false
 }
 
 theme() {
-  gsettings set org.gnome.desktop.interface gtk-theme "Yaru-dark"
+    gsettings set org.gnome.desktop.interface gtk-theme "Yaru-dark"
 }
 
 iconSize() {
-  gsettings set org.gnome.nautilus.icon-view default-zoom-level 'large'
-}
-
-gnomeExtensions () {
-  for extension in "${GNOME_EXTENSIONS[@]}"; do
-    extensionInstall "$extension" &>/dev/null
-  done
+    gsettings set org.gnome.nautilus.icon-view default-zoom-level 'large'
 }
 
 sudo echo
@@ -96,7 +90,4 @@ theme
 spinner stop $?
 spinner start "Set nautilus icon size"
 iconSize
-spinner stop $?
-spinner start "Installing gnome extensions..."
-gnomeExtensions
 spinner stop $?
