@@ -18,10 +18,6 @@ extensionDisable() {
     fi
 }
 
-extensionRemove() {
-    echo "Removing extension not implemnted"
-}
-
 fetchDescriptionFileByPk() {
     local extensionId="$1"
     local descriptionFile
