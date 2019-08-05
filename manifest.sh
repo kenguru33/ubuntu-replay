@@ -55,6 +55,8 @@ export -A REPO_DEB_SRC=(
 export DEFAULT_EDITOR="/usr/bin/vim.basic"
 
 export GNOME_EXTENSIONS=(
-    "sound-output-device-chooser@kgshank.net" # pk=906
-    "caffeine@patapon.info" # pk=517
+    "sound-output-device-chooser@kgshank.net" 
+    "caffeine@patapon.info" 
+    "clipboard-indicator@tudmotu.com"
+    "gnome-shell-screenshot@ttll.de"
 )

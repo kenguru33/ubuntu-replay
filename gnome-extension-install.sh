@@ -1,7 +1,7 @@
 #!/bin/bash
 
 set -o pipefail
-#set -o nounset
+set -o nounset
 
 if [[ "${UBUNTU_REPLAY_ONLINE:-}" -eq 1 ]]; then
     # shellcheck source=lib/spinner.sh
