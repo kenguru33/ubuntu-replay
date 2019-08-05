@@ -24,6 +24,7 @@ export UBUNTU_REPLAY_VERSION
 export UBUNTU_REPLAY_ONLINE
 export UBUNTU_REPLAY_SRC_URL
 
+clear
 sudo echo "Welcome to Ubuntu Replay V1.0" || exit 1
 
 scripts=(

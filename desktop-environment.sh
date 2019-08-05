@@ -1,7 +1,10 @@
 #!/bin/bash
 
 set -o pipefail
-#set -o nounset
+set -o nounset
+
+info="\\e[1;1m"
+nc="\\e[0m"
 
 if [[ "${UBUNTU_REPLAY_ONLINE:-}" -eq 1 ]]; then
     # shellcheck source=lib/package.sh
@@ -64,7 +67,7 @@ iconSize() {
     gsettings set org.gnome.nautilus.icon-view default-zoom-level 'large'
 }
 
-sudo echo
+printf "$info%s$nc\\n" "Desktop environment" || exit 1
 
 spinner start "Setting windows buttons to $BUTTON_LAYOUT"
 gsettings set org.gnome.desktop.wm.preferences button-layout "${BUTTON_LAYOUT}" &>/dev/null

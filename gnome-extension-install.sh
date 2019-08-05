@@ -3,6 +3,9 @@
 set -o pipefail
 set -o nounset
 
+info="\\e[1;1m"
+nc="\\e[0m"
+
 if [[ "${UBUNTU_REPLAY_ONLINE:-}" -eq 1 ]]; then
     # shellcheck source=lib/spinner.sh
     source <(wget -qO- "${UBUNTU_REPLAY_SRC_URL}/lib/spinner.sh") &>/dev/null
@@ -29,6 +32,7 @@ gnomeExtensionInstall () {
     extensionEnable "$uuid" &>/dev/null
 }
 
+printf "$info%s$nc\\n" "Gnome extensions" || exit 1
 
 for extension in "${GNOME_EXTENSIONS[@]}"; do 
   spinner start "Installing extension ${extension}"
