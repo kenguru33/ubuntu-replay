@@ -47,6 +47,11 @@ debPackageAddRepo() {
     fi
 }
 
+debPackageIsInstalled() {
+    local package=$1
+    (dpkg-query -W --showformat='${Status}\n' "$package" | grep "install ok installed")
+}
+
 snapPackageInstall() {
     local package="$1"
     if [[ "$(snap search "$package" | awk '{print $1 " : "  $4}' | grep -w classic | grep -c "$package ")" -eq 1 ]]; then

@@ -13,6 +13,8 @@ export PACKAGES=(
     apt-transport-https
     gnome-tweaks
     chrome-gnome-shell
+	libsecret-1-0 
+	libsecret-1-dev
 )
 
 export SNAP_PACKAGES=(

@@ -35,6 +35,7 @@ scripts=(
     "desktop-environment.sh"
     "shell-environment.sh"
     "gnome-extension-install.sh"
+    "git-setup.sh"
 )
 
 if [[ "$UBUNTU_REPLAY_ONLINE" -eq 1 ]]; then
