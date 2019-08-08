@@ -81,5 +81,4 @@ installShellPrompt &>/dev/null
 spinner stop $?
 # shellcheck disable=SC1090
 source "${HOME}/.profile"
-# shellcheck disable=SC1090
-source "${HOME}/.zshrc"
+exec zsh -l
