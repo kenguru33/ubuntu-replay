@@ -54,11 +54,14 @@ installShellPrompt() {
     grep -qxF 'autoload -U promptinit; promptinit' "${HOME}"/.zshrc || echo 'autoload -U promptinit; promptinit' >> "${HOME}"/.zshrc &&
     grep -qxF 'prompt pure' "${HOME}"/.zshrc || echo 'prompt pure' >> "${HOME}"/.zshrc
 }
-
 setupNpm() {
     # where to place global modules
     npm config set prefix ~/.npm &&
-    addPath "\$HOME/.npm/bin"
+    addPath "\$HOME/.npm/bin" 
+    # force npm/bin to path
+    mkdir -p "${HOME}/.npm/bin"
+    # shellcheck disable=1090
+    source ~/.profile
 }
 
 sudo printf "$info%s$nc\\n" "Shell environment" || exit 1
@@ -79,6 +82,3 @@ spinner stop $?
 spinner start "Install shell prompt..."
 installShellPrompt &>/dev/null
 spinner stop $?
-# shellcheck disable=SC1090
-source "${HOME}/.profile"
-exec zsh -l
