@@ -1,7 +1,7 @@
 #!/bin/bash
 
 set -o pipefail
-set -o nounset
+# set -o nounset
 
 info="\\e[1;1m"
 nc="\\e[0m"
@@ -49,6 +49,7 @@ installShellPrompt() {
     # sudo npm config set unsafe-perm true &&
     npm install -g pure-prompt &&
     sed -i -e 's/ZSH_THEME=".*"/ZSH_THEME=""/' "${HOME}"/.zshrc &&
+    sed -i -e 's/plugins=(.*)/plugins=(git zsh-syntax-highlighting)/' "${HOME}"/.zshrc &&
     grep -qxF 'fpath+=('/home/bernt/.npm/lib/node_modules/pure-prompt/functions')' "${HOME}"/.zshrc || echo "fpath+=('/home/bernt/.npm/lib/node_modules/pure-prompt/functions')" >> "${HOME}"/.zshrc &&
     grep -qxF 'autoload -U promptinit; promptinit' "${HOME}"/.zshrc || echo 'autoload -U promptinit; promptinit' >> "${HOME}"/.zshrc &&
     grep -qxF 'prompt pure' "${HOME}"/.zshrc || echo 'prompt pure' >> "${HOME}"/.zshrc
