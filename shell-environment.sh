@@ -57,7 +57,7 @@ installShellPrompt() {
 setupNpm() {
     # where to place global modules
     npm config set prefix ~/.npm &&
-    addPath "\$HOME/.npm/bin" 
+    addPath "\$HOME/.npm/bin"
 }
 
 sudo printf "$info%s$nc\\n" "Shell environment" || exit 1
@@ -78,3 +78,7 @@ spinner stop $?
 spinner start "Install shell prompt..."
 installShellPrompt &>/dev/null
 spinner stop $?
+# shellcheck disable=SC1090
+source "${HOME}/.profile"
+# shellcheck disable=SC1090
+source "${HOME}/.zshrc"
