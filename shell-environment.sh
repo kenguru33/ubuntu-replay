@@ -55,9 +55,8 @@ installShellPrompt() {
 
 setupNpm() {
     # where to place global modules
-    npm config set prefix ~/.npm
-    addPath "\$HOME/.npm/bin"
-
+    npm config set prefix ~/.npm &>/dev/null &&
+    addPath "\$HOME/.npm/bin" &>/dev/null
 }
 
 sudo printf "$info%s$nc\\n" "Shell environment" || exit 1
