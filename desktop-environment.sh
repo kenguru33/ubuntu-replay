@@ -83,7 +83,7 @@ spinner start "Setting wallpaper..."
 wallpaper
 spinner stop $?
 spinner start "Setting default editor..."
-defaultEditor
+defaultEditor &>/dev/null
 spinner stop $?
 spinner start "Disabling colors from system theme on terminal..."
 terminalColor
