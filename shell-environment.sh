@@ -13,6 +13,8 @@ if [[ "${UBUNTU_REPLAY_ONLINE:-}" -eq 1 ]]; then
     source <(wget -qO- "${UBUNTU_REPLAY_SRC_URL}/lib/spinner.sh") &>/dev/null
     # shellcheck source=manifest.sh
     source <(wget -qO- "${UBUNTU_REPLAY_SRC_URL}/manifest.sh") &>/dev/null
+    # shellcheck source=lib/environment-tools.sh
+    source <(wget -qO- "${UBUNTU_REPLAY_SRC_URL}/lib/environment-tools.sh") &>/dev/null
 else
     dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
     # shellcheck source=manifest.sh
@@ -21,6 +23,8 @@ else
     source "${dir}/lib/package.sh"
     # shellcheck source=lib/spinner.sh
     source "${dir}/lib/spinner.sh"
+    # shellcheck source=lib/environment-tools.sh
+    source "${dir}/lib/environment-tools.sh"
 fi
 
 setDefaultShell() {
@@ -42,11 +46,18 @@ installSyntaxHighLighting() {
 }
 
 installShellPrompt() {
-    sudo npm config set unsafe-perm true &&
+    # sudo npm config set unsafe-perm true &&
     sudo npm install -g pure-prompt &&
     sed -i -e 's/ZSH_THEME=".*"/ZSH_THEME=""/' "${HOME}"/.zshrc &&
     grep -qxF 'autoload -U promptinit; promptinit' "${HOME}"/.zshrc || echo 'autoload -U promptinit; promptinit' >> "${HOME}"/.zshrc &&
     grep -qxF 'prompt pure' "${HOME}"/.zshrc || echo 'prompt pure' >> "${HOME}"/.zshrc
+}
+
+setupNpm() {
+    # where to place global modules
+    npm config set prefix ~/.npm
+    addPath "\$HOME/.npm/bin"
+
 }
 
 sudo printf "$info%s$nc\\n" "Shell environment" || exit 1
@@ -58,6 +69,10 @@ spinner stop $?
 spinner start "Install zsh framework..."
 installZshFramework &>/dev/null &&
 installSyntaxHighLighting &>/dev/null
+spinner stop $?
+
+spinner start "Configure npm prefix"
+setupNpm &>/dev/null
 spinner stop $?
 
 spinner start "Install shell prompt..."
