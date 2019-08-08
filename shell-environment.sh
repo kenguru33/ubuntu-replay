@@ -47,7 +47,7 @@ installSyntaxHighLighting() {
 
 installShellPrompt() {
     # sudo npm config set unsafe-perm true &&
-    sudo npm install -g pure-prompt &&
+    npm install -g pure-prompt &&
     sed -i -e 's/ZSH_THEME=".*"/ZSH_THEME=""/' "${HOME}"/.zshrc &&
     grep -qxF 'autoload -U promptinit; promptinit' "${HOME}"/.zshrc || echo 'autoload -U promptinit; promptinit' >> "${HOME}"/.zshrc &&
     grep -qxF 'prompt pure' "${HOME}"/.zshrc || echo 'prompt pure' >> "${HOME}"/.zshrc
