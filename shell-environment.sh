@@ -72,9 +72,9 @@ installSyntaxHighLighting &>/dev/null
 spinner stop $?
 
 spinner start "Configure npm prefix"
-setupNpm &>/dev/null
+setupNpm 
 spinner stop $?
 
 spinner start "Install shell prompt..."
-installShellPrompt &>/dev/null
+installShellPrompt 
 spinner stop $?
