@@ -56,8 +56,8 @@ installShellPrompt() {
 
 setupNpm() {
     # where to place global modules
-    npm config set prefix ~/.npm &>/dev/null &&
-    addPath "\$HOME/.npm/bin" &>/dev/null
+    npm config set prefix ~/.npm &&
+    addPath "\$HOME/.npm/bin" 
 }
 
 sudo printf "$info%s$nc\\n" "Shell environment" || exit 1
@@ -72,9 +72,9 @@ installSyntaxHighLighting &>/dev/null
 spinner stop $?
 
 spinner start "Configure npm prefix"
-setupNpm 
+setupNpm &>/dev/null
 spinner stop $?
 
 spinner start "Install shell prompt..."
-installShellPrompt 
+installShellPrompt &>/dev/null
 spinner stop $?
