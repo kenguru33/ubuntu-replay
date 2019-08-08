@@ -6,9 +6,9 @@ set -o errexit
 cleanup() {
     exitCode=$?
     if [[ "$exitCode" -eq 0 ]]; then
-        echo
-        echo -n "Ubuntu is now replayed! "
-        echo "Log out to make the changes effective." 
+        gome-shell -r &
+        disown
+        exec zsh -l
     fi
 }
 
@@ -36,7 +36,6 @@ scripts=(
     "shell-environment.sh"
     "gnome-extension-install.sh"
     "git-setup.sh"
-    exec zsh -l
 )
 
 if [[ "$UBUNTU_REPLAY_ONLINE" -eq 1 ]]; then
