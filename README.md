@@ -10,6 +10,8 @@ Tested with Ubuntu 19.04
 - Replace snap packages. (If snap package found in ubuntu repoitory, it wil be replaced. If not, leave snap package installed)
 - Some nice Gnome extension (Caffeine, Sound output input selector, Clipboard indicator etc...)
 - Desktop polish (custom desktop background, select default dark mode etc.)
+- Configure npm properly. No need to use sudo for global installs.
+- Configure git with credential helper using libsecret.
 
 See manifest.sh for more details.
 
