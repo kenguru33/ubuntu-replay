@@ -6,7 +6,7 @@ set -o errexit
 cleanup() {
     exitCode=$?
     if [[ "$exitCode" -eq 0 ]]; then
-        gome-shell -r &
+        gnome-shell -r &
         disown
         exec zsh -l
     fi
