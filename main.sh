@@ -3,11 +3,16 @@
 set -o pipefail
 set -o errexit
 
+info="\\e[1;1m"
+nc="\\e[0m"
+
 cleanup() {
     exitCode=$?
     if [[ "$exitCode" -eq 0 ]]; then
-        gnome-shell -r &
+        gnome-shell -r &>/dev/null &
         disown
+        printf "\\n$info%s$nc\\n" "All done."
+        echo "Log out to make zsh the default shell!"
         exec zsh -l
     fi
 }
