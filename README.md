@@ -1,4 +1,4 @@
-# Replay Ubuntu 19.04 setup.
+# Replay Ubuntu 19.04 / 19.10 setup.
 
 Tested with Ubuntu 19.04
 
