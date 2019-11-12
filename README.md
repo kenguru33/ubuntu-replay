@@ -1,6 +1,6 @@
 # Replay Ubuntu 19.04 / 19.10 setup.
 
-Tested with Ubuntu 19.04
+Tested with Ubuntu 19.04 and 19.10
 
 ### Key feutures:
 
