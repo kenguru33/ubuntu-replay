@@ -52,7 +52,7 @@ export -A REPO_DEB=(
     [vscode]="deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
 )
 export -A REPO_DEB_SRC=(
-    [nodejs]="deb-src https://deb.nodesource.com/node_12.x $DISTRO main"
+    [nodejs]="deb-src https://deb.nodesource.com/node_12.x ${DISTRO} main"
 )
 
 export DEFAULT_EDITOR="/usr/bin/vim.basic"

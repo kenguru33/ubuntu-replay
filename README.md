@@ -1,6 +1,6 @@
-# Replay Ubuntu 19.04 / 19.10 setup.
+# Replay Ubuntu 20.04 LTS
 
-Tested with Ubuntu 19.04 and 19.10
+Tested with Ubuntu 20.04 LTS
 
 ### Key feutures:
 
