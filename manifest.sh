@@ -1,8 +1,5 @@
 # shellcheck shell=bash
 
-export DISTRO="$(lsb_release -s -c)"
-export NODE_VERSION="node_12.x"
-
 export PACKAGES=(
     git
     build-essential
@@ -49,12 +46,12 @@ export -A REPO_KEY=(
 )
 
 export -A REPO_DEB=(
-    [nodejs]="deb https://deb.nodesource.com/node_12.x $(lsb_release -s -c) main" 
+    [nodejs]="deb https://deb.nodesource.com/node_12.x disco main" 
     [google-chrome]="deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main"
     [vscode]="deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
 )
 export -A REPO_DEB_SRC=(
-    [nodejs]="deb-src https://deb.nodesource.com/node_12.x $(lsb_release -s -c) main"
+    [nodejs]="deb-src https://deb.nodesource.com/node_12.x disco main"
 )
 
 export DEFAULT_EDITOR="/usr/bin/vim.basic"
