@@ -23,4 +23,4 @@ Just copy and paste this in a terminal windows:
 wget -qO- https://raw.githubusercontent.com/kenguru33/ubuntu-replay/master/main.sh | bash -s
 ```
 
-Also it is recommended to make sure your system is fully udatated before replaying your Ubuntu installation. 
+Also it is recommended to make sure your system is fully updated before replaying your Ubuntu installation. 
