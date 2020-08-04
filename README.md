@@ -17,7 +17,7 @@ See manifest.sh for more details.
 
 ### Installation
 
-Just copy and paste this in a terminal windows:
+Just copy and paste this in a terminal window:
 
 ```console
 wget -qO- https://raw.githubusercontent.com/kenguru33/ubuntu-replay/master/main.sh | bash -s
