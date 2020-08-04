@@ -5,7 +5,7 @@ Tested with Ubuntu 20.04 LTS
 ### Key feutures:
 
 - Traditional Gnome setup. (Toolbar, No icons on desktop etc...)
-- Installing extra packages (git, curl, vim, Chome, Visual Studio code, nodejs etc...)
+- Installing extra packages (git, curl, vim, Chrome, Visual Studio code, nodejs etc...)
 - Nice shell setup with Oh-My-Zsh shell. (pure prompt, syntaxhighligthing plugin)
 - Replace snap packages. (If snap package found in ubuntu repoitory, it wil be replaced. If not, leave snap package installed)
 - Some nice Gnome extension (Caffeine, Sound output input selector, Clipboard indicator etc...)
